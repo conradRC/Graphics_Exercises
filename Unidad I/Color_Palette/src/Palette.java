@@ -22,7 +22,7 @@ public class Palette extends JPanel {
 	private static int quantity;
 
 	public Palette() {
-		quantity = 11;	
+		quantity = 15;	
 		setLayout(new BorderLayout(30, 40));
 		setBackground(new Color(30, 30, 30));
 		initComponents();
@@ -101,7 +101,7 @@ public class Palette extends JPanel {
 		container_Colors.removeAll();
 		color_selected.setBackground(new Color(r,g,b));
 		int s=r, t=g, u=b;
-		int change=15;
+		int change=10;
 		Stack<Color> blackColors = new Stack<Color>();
 		for (int i = 0; i < quantity/2; i++) {
 			s= black_Color(s,change);

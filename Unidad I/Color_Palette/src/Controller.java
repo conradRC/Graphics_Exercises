@@ -19,7 +19,7 @@ public class Controller implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		String warning = "Valores introducidos no válidos, rango aceptado (0-255)";
+		String warning = "Valores introducidos no validos, rango aceptado (0-255)";
 		if (e.getSource() == vista.getTxtHex()) {
 			if(!vista.getTxtHex().getText().isEmpty()) {
 				String h = vista.getTxtHex().getText();
@@ -36,7 +36,7 @@ public class Controller implements KeyListener {
 					
 				}
 				else {
-					vista.getWarning().setText("  Valor hexadecimal no válido, solo números y letras en el rango (A-F) con una longitud igual a 6 ");
+					vista.getWarning().setText("  Valor hexadecimal no vï¿½lido, solo nï¿½meros y letras en el rango (A-F) con una longitud igual a 6 ");
 				}
 			}
 		}

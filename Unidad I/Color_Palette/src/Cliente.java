@@ -1,10 +1,13 @@
+/**Compilation:  javac Cliente.java
+ *  Execution:    java Cliente
+ *  Dependencies: none
+*/
+
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
-
 public class Cliente {
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Cruz Mejía Conrado");
+		JFrame frame = new JFrame("Cruz Mejia Conrado");
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		frame.setSize(1000, 600);
 		Palette p = new Palette();
