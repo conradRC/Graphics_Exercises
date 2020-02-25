@@ -72,6 +72,9 @@ public class Palette extends JPanel {
 		View_Styles.styles_Input(txtB);
 		View_Styles.styles_Input(txtHex,5);
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		control_panel.add(lblNewLabel);
+		
 		warning = new JLabel("");
 		container_Head.add(warning);
 		container_Value.add(container_Head);
