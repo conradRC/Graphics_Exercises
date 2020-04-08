@@ -34,10 +34,8 @@ public class Transformar {
         ListIterator lit = puntos.listIterator();
         float x1, y1, x, y;
         Punto p;
-      
         /** generamos los nuevos puntos */
-        while(lit.hasNext())
-        { 
+        while(lit.hasNext()){ 
             p  = (Punto) lit.next();
             x  = p.getX();
             y  = p.getY();
@@ -47,7 +45,6 @@ public class Transformar {
             x  = x1;
             y = y1;                
         }
-        
         return puntos;
     }
     
@@ -56,10 +53,8 @@ public class Transformar {
         ListIterator lit = puntos2.listIterator();
         float x1, x, y1, y;
         Punto p;
-        
         /** generamos los nuevos puntos */
-        while(lit.hasNext())
-        { 
+        while(lit.hasNext()){ 
             p  = (Punto) lit.next();
             x  = p.getX();
             y  = p.getY();
@@ -70,7 +65,6 @@ public class Transformar {
             x  = x1;
             y  = y1; 
         }
-        
         return puntos2;
     }
      
@@ -80,8 +74,7 @@ public class Transformar {
         Punto p;
         /** generamos los nuevos puntos */
         ListIterator lit = puntos2.listIterator();
-        while(lit.hasNext())
-        {   
+        while(lit.hasNext()){   
             p  = (Punto) lit.next();
             x  = p.getX();
             y  = p.getY();
@@ -91,7 +84,6 @@ public class Transformar {
             x  = x1;
             y  = y1;
         }
-        
         return puntos2;
     }
         
@@ -101,8 +93,7 @@ public class Transformar {
         Punto p;
         /** generamos los nuevos puntos */
         ListIterator lit = puntos2.listIterator();
-        while(lit.hasNext())
-        {   
+        while(lit.hasNext()){   
             p  = (Punto)lit.next();
             x  = p.getX();
             y  = p.getY();
@@ -110,7 +101,6 @@ public class Transformar {
             y1 = (float) y;
             lit.set(new Punto(x1, y1));
         }
-        
         return puntos2;
     }
 }

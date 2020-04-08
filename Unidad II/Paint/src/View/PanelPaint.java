@@ -9,7 +9,7 @@ import java.awt.geom.*;
 import java.util.*;
 
 public class PanelPaint extends JPanel {
-    int ancho,alto;
+    
     ArrayList puntos;
     Punto p,tp;
     boolean boolDibujar = false;
@@ -17,12 +17,7 @@ public class PanelPaint extends JPanel {
                                Color.yellow,Color.green, Color.pink,
                                Color.gray };
     
-    
-    public PanelPaint(int ancho,int alto,int x,int y) {         
-        this.ancho = ancho;
-        this.alto  = alto;
-        setSize(ancho,alto);
-        setLocation(x,y);
+    public PanelPaint(int x,int y) {
         setBackground(Color.white);
     }
     
@@ -40,13 +35,14 @@ public class PanelPaint extends JPanel {
         repaint();
     }
     
-    public void paint (Graphics g) {        
-        super.paint(g);
+    public void paint (Graphics g) {     
+    	super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        
+        int ancho = getWidth();
+        int alto = getHeight();
         /** Mover el origen al centro */
         g2.translate(ancho/2, alto/2);
-        g2.setPaint(Color.red);
+        g2.setPaint(Color.WHITE);
         g2.fill(new Rectangle2D.Double(-ancho/2,-alto/2,ancho,alto));
         
         /** Trazar los ejes de coordenadas */
