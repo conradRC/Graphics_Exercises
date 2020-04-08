@@ -5,14 +5,14 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import Component.ComponentDesing;
 import Controller.ControllerInterfaz;
-import javax.swing.JComboBox;
+import complements.ComponentDesing;
 
 public class Interfaz extends JPanel {
 	private JTextField px;
@@ -20,12 +20,11 @@ public class Interfaz extends JPanel {
 	private JTextField wx;
 	private JTextField hy;
 	private JTextField edges;
-	private JTextField trans,trans2;
+	private JTextField trans, trans2;
 	private JPanel container_Head;
 	static JLabel warning;
 	PanelPaint pPaint;
 	private JButton btnAceptar;
-
 	private ComponentDesing pPosition, pSize, pEdges, transf;
 	private JComboBox<String> transformaciones;
 	private JPanel pReserved;
@@ -81,19 +80,19 @@ public class Interfaz extends JPanel {
 		transformaciones.setBackground(Color.WHITE);
 		transformaciones.setMaximumRowCount(55);
 
-		transformaciones.addItem("NONE");
+		transformaciones.addItem("SELECT ...");
 		transformaciones.addItem("ROTAR");
 		transformaciones.addItem("TRASLADAR");
 		transformaciones.addItem("ESCALADO");
 		transformaciones.addItem("SESGADO");
 
 		container_Head.add(transformaciones);
-		
+
 		pReserved = new JPanel();
 		pReserved.setBackground(Color.WHITE);
 		container_Head.add(pReserved);
 		pReserved.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		btnAceptar = new JButton("DIBUJAR");
 		btnAceptar.setForeground(Color.WHITE);
 		btnAceptar.setBackground(Color.BLACK);
@@ -104,14 +103,14 @@ public class Interfaz extends JPanel {
 		btnAceptar.setActionCommand("DIBUJAR");
 		transformaciones.addActionListener(c);
 		transformaciones.setActionCommand("CHOOSED");
-		
+
 		btClear = new JButton("BORRAR");
 		btClear.setForeground(Color.WHITE);
 		btClear.setBackground(Color.BLACK);
 		btClear.addActionListener(c);
 		btClear.setActionCommand("CLEAR");
 		container_Head.add(btClear);
-		
+
 		warning = new JLabel("");
 		warning.setHorizontalAlignment(SwingConstants.CENTER);
 		warning.setOpaque(true);
@@ -123,28 +122,29 @@ public class Interfaz extends JPanel {
 	public void showChoosed(int key) {
 		trans.setText("");
 		trans2.setText("");
+		boolean flag =true;
 		pReserved.removeAll();
 		switch (key) {
+		case 0:
+			pReserved.removeAll();
+			flag=false;
 		case 1:
 			transf = new ComponentDesing(5, trans);
-			pReserved.add(transf);
 			break;
 		case 2:
-			transf = new ComponentDesing(5, trans,trans2);
-			pReserved.add(transf);
+			transf = new ComponentDesing(5, trans, trans2);
 			break;
 		case 3:
-			transf = new ComponentDesing(5, trans,trans2);
-			pReserved.add(transf);
+			transf = new ComponentDesing(5, trans, trans2);
 			break;
-			
 		case 4:
 			transf = new ComponentDesing(5, trans);
-			pReserved.add(transf);
 			break;
 		default:
 			break;
 		}
+		
+		if(flag)	pReserved.add(transf);
 		
 		updateUI();
 	}
@@ -184,10 +184,9 @@ public class Interfaz extends JPanel {
 	public JTextField getTrans() {
 		return trans;
 	}
-	
+
 	public JTextField getTrans2() {
 		return trans2;
 	}
 
-	
 }
