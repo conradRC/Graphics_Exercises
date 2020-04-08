@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import Controller.ControllerInterfaz;
+
 public class Paint {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Trazador de figuras geometricas");
@@ -13,15 +15,11 @@ public class Paint {
 		int width = (int) (screenSize.width * 0.7);
 		int height = (int) (screenSize.height * 0.9);
 		frame.setSize(width, height);
-		frame.setLocationRelativeTo(null);
 		frame.add(new Interfaz());
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 }
-
-
-
-
 
 
 

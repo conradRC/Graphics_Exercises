@@ -102,11 +102,13 @@ public class Trazar{
 	}
 
 	public ArrayList trazarPol() {
-		x = Float.parseFloat(JOptionPane.showInputDialog("Coordenada en x"));
-		y = Float.parseFloat(JOptionPane.showInputDialog("Coordenada en y")) * -1;
-		int nAristas = Integer.parseInt(JOptionPane.showInputDialog("Numero de aristas:"));
+		int x = 50;
+		int y = 60;
+		int nAristas = 10;
 		puntos = Transformar.trazarPol(x, y, nAristas);
 		dibujo = true;
 		return puntos;
 	}
 }
+
+

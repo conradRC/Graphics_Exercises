@@ -17,7 +17,7 @@ public class PanelPaint extends JPanel {
                                Color.yellow,Color.green, Color.pink,
                                Color.gray };
     
-    public PanelPaint(int x,int y) {
+    public PanelPaint() {
         setBackground(Color.white);
     }
     

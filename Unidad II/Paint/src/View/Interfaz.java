@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controller.Controller;
+import Controller.ControllerInterfaz;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -22,7 +22,8 @@ public class Interfaz extends JPanel {
 	private JTextField edges;
 	private JPanel container_Head;
 	PanelPaint pPaint;
-	
+	private JButton btnAceptar;
+
 	public Interfaz() {
 		setLayout(new BorderLayout());
 		setBackground(new Color(30, 30, 30));
@@ -35,7 +36,7 @@ public class Interfaz extends JPanel {
 	}
 
 	public void initWork() {
-		pPaint     = new PanelPaint(201,0);
+		pPaint = new PanelPaint();
 		pPaint.setBackground(new Color(248, 248, 255));
 		add(pPaint, BorderLayout.CENTER);
 	}
@@ -52,23 +53,30 @@ public class Interfaz extends JPanel {
 
 		container_Value.add(container_Head);
 		container_Head.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 0));
-		
-		JPanel pPosition= components("COORDENADAS: ",100, px,py);
+
+		JPanel pPosition = components("COORDENADAS: ", 100, px, py);
 		container_Head.add(pPosition);
-		
-		JPanel pSize= components("TAMAÑO: ",60, wx,hy);
+
+		JPanel pSize = components("TAMAÑO: ", 60, wx, hy);
 		container_Head.add(pSize);
-		
-		JPanel pEdges= components("ARISTAS: ",60, edges);
+
+		JPanel pEdges = components("ARISTAS: ", 60, edges);
 		container_Head.add(pEdges);
-		
-		JButton btnAceptar = new JButton("Aceptar");
+
+		btnAceptar = new JButton("Aceptar");
+
 		btnAceptar.setForeground(Color.WHITE);
 		btnAceptar.setBackground(Color.BLACK);
 		container_Head.add(btnAceptar);
+		
+		ControllerInterfaz c = new ControllerInterfaz(this);
+		btnAceptar.addActionListener(c);
+		btnAceptar.setActionCommand("DIBUJAR");
+		
 	}
+	
 
-	public JPanel components(String name_function,int width, JTextField one, JTextField two) {
+	public JPanel components(String name_function, int width, JTextField one, JTextField two) {
 		JPanel p = new JPanel();
 		FlowLayout fl_p = new FlowLayout();
 		fl_p.setHgap(0);
@@ -84,37 +92,38 @@ public class Interfaz extends JPanel {
 
 		one = new JTextField();
 		two = new JTextField();
-		
+
 		View_Styles.styles_Input(one);
 		View_Styles.styles_Input(two);
-		View_Styles.styles_Label(label,width);
-		
+		View_Styles.styles_Label(label, width);
+
 		p.add(one);
 		p.add(two);
-		
+
 		return p;
 	}
 
-	
-	public JPanel components(String name_function,int width, JTextField one) {
+	public JPanel components(String name_function, int width, JTextField one) {
 		JPanel p = new JPanel();
 		p.setLayout(new FlowLayout());
 		p.setBackground(Color.WHITE);
-		
+
 		JLabel label = new JLabel(name_function);
 		p.add(label);
 
 		one = new JTextField();
-		
+
 		View_Styles.styles_Input(one);
-		View_Styles.styles_Label(label,width);
-		
-		p.add(one);
-		
+		View_Styles.styles_Label(label, width);
+
+		p.add(one);	
+
 		return p;
 	}
 
-	public void conect_controller(Controller control) {
-
+	public PanelPaint getpPaint() {
+		return pPaint;
 	}
+
+	
 }

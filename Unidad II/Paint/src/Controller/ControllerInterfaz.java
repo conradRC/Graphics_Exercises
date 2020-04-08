@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import Model.Trazar;
 import View.Interfaz;
 
-public class Controller implements ActionListener{
+public class ControllerInterfaz implements ActionListener{
  
 	Trazar trazar;
 	Interfaz i;
-	public Controller(Interfaz i) {
+	public ControllerInterfaz(Interfaz i) {
 		this.i=i;
 	}
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -23,11 +24,11 @@ public class Controller implements ActionListener{
 		int hy = 30;
 		int aristas = 4;
 		ArrayList puntos;
-		
+		System.out.println(comando);
 		switch (comando) {
 		case "DIBUJAR":
 			puntos = trazar.dibujar();
-			//pPaint.dibujar(puntos);
+			i.getpPaint().dibujar(puntos);
 			break;
 		case "ROTAR":
 			
