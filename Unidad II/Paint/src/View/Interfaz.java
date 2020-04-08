@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 import Component.ComponentDesing;
 import Controller.ControllerInterfaz;
+import javax.swing.JComboBox;
 
 public class Interfaz extends JPanel {
 	private JTextField px;
@@ -19,13 +20,18 @@ public class Interfaz extends JPanel {
 	private JTextField wx;
 	private JTextField hy;
 	private JTextField edges;
+	private JTextField trans,trans2;
 	private JPanel container_Head;
 	static JLabel warning;
 	PanelPaint pPaint;
 	private JButton btnAceptar;
 
-	private ComponentDesing pPosition,pSize,pEdges;
-	
+	private ComponentDesing pPosition, pSize, pEdges, transf;
+	private JComboBox<String> transformaciones;
+	private JPanel pReserved;
+	private JLabel label;
+	private JButton btClear;
+
 	public Interfaz() {
 		setLayout(new BorderLayout());
 		setBackground(new Color(30, 30, 30));
@@ -54,12 +60,13 @@ public class Interfaz extends JPanel {
 		container_Value.add(container_Head, BorderLayout.NORTH);
 		container_Head.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 0));
 
-		px = new JTextField();
-		py = new JTextField();
-		wx = new JTextField();
-		hy = new JTextField();
-		edges = new JTextField();
-		
+		px = new JTextField("-200");
+		py = new JTextField("50");
+		wx = new JTextField("100");
+		hy = new JTextField("10");
+		edges = new JTextField("4");
+		trans = new JTextField();
+		trans2 = new JTextField();
 		pPosition = new ComponentDesing("COORDENADAS: ", 100, px, py);
 		container_Head.add(pPosition);
 
@@ -69,15 +76,41 @@ public class Interfaz extends JPanel {
 		pEdges = new ComponentDesing("ARISTAS: ", 60, edges);
 		container_Head.add(pEdges);
 
-		btnAceptar = new JButton("Aceptar");
+		transformaciones = new JComboBox<String>();
+		transformaciones.setEditable(true);
+		transformaciones.setBackground(Color.WHITE);
+		transformaciones.setMaximumRowCount(55);
 
+		transformaciones.addItem("NONE");
+		transformaciones.addItem("ROTAR");
+		transformaciones.addItem("TRASLADAR");
+		transformaciones.addItem("ESCALADO");
+		transformaciones.addItem("SESGADO");
+
+		container_Head.add(transformaciones);
+		
+		pReserved = new JPanel();
+		pReserved.setBackground(Color.WHITE);
+		container_Head.add(pReserved);
+		pReserved.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		btnAceptar = new JButton("DIBUJAR");
 		btnAceptar.setForeground(Color.WHITE);
 		btnAceptar.setBackground(Color.BLACK);
 		container_Head.add(btnAceptar);
-		
+
 		ControllerInterfaz c = new ControllerInterfaz(this);
 		btnAceptar.addActionListener(c);
 		btnAceptar.setActionCommand("DIBUJAR");
+		transformaciones.addActionListener(c);
+		transformaciones.setActionCommand("CHOOSED");
+		
+		btClear = new JButton("BORRAR");
+		btClear.setForeground(Color.WHITE);
+		btClear.setBackground(Color.BLACK);
+		btClear.addActionListener(c);
+		btClear.setActionCommand("CLEAR");
+		container_Head.add(btClear);
 		
 		warning = new JLabel("");
 		warning.setHorizontalAlignment(SwingConstants.CENTER);
@@ -86,9 +119,42 @@ public class Interfaz extends JPanel {
 		warning.setBackground(Color.WHITE);
 		container_Value.add(warning, BorderLayout.SOUTH);
 	}
-	
+
+	public void showChoosed(int key) {
+		trans.setText("");
+		trans2.setText("");
+		pReserved.removeAll();
+		switch (key) {
+		case 1:
+			transf = new ComponentDesing(5, trans);
+			pReserved.add(transf);
+			break;
+		case 2:
+			transf = new ComponentDesing(5, trans,trans2);
+			pReserved.add(transf);
+			break;
+		case 3:
+			transf = new ComponentDesing(5, trans,trans2);
+			pReserved.add(transf);
+			break;
+			
+		case 4:
+			transf = new ComponentDesing(5, trans);
+			pReserved.add(transf);
+			break;
+		default:
+			break;
+		}
+		
+		updateUI();
+	}
+
 	public PanelPaint getpPaint() {
 		return pPaint;
+	}
+
+	public int getTransformaciones() {
+		return transformaciones.getSelectedIndex();
 	}
 
 	public static JLabel getWarning() {
@@ -114,5 +180,14 @@ public class Interfaz extends JPanel {
 	public JTextField getEdges() {
 		return edges;
 	}
+
+	public JTextField getTrans() {
+		return trans;
+	}
+	
+	public JTextField getTrans2() {
+		return trans2;
+	}
+
 	
 }

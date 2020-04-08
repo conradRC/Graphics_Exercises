@@ -47,4 +47,20 @@ public class ComponentDesing extends JPanel{
 
 		add(one);
 	}
+	
+	public ComponentDesing(int width, JTextField one) {
+		setLayout(new FlowLayout());
+		setBackground(Color.WHITE);
+		View_Styles.styles_Input(one,width);
+		add(one);
+	}
+	
+	public ComponentDesing(int width, JTextField one,JTextField two) {
+		setLayout(new FlowLayout());
+		setBackground(Color.WHITE);
+		View_Styles.styles_Input(one,width);
+		View_Styles.styles_Input(two,width);
+		add(one);
+		add(two);
+	}
 }

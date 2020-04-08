@@ -1,12 +1,11 @@
 package View;
 
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 
-import Controller.ControllerInterfaz;
-
+import View.Interfaz;
 public class Paint {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Trazador de figuras geometricas");
@@ -20,7 +19,6 @@ public class Paint {
 		frame.setVisible(true);
 	}
 }
-
 
 
 
