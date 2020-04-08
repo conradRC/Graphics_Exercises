@@ -24,7 +24,7 @@ public class PanelPaint extends JPanel {
     public void dibujar(ArrayList puntos) {
         this.puntos = puntos;     
         boolDibujar = true;
-        tp          = new Punto(0,0);
+        tp          = new Punto(100,100);
         repaint();
     }
     
@@ -34,6 +34,7 @@ public class PanelPaint extends JPanel {
         boolDibujar = true;
         repaint();
     }
+    
     
     public void paint (Graphics g) {     
     	super.paint(g);
@@ -51,7 +52,8 @@ public class PanelPaint extends JPanel {
         g2.drawLine(0,(int)-alto/2,0, (int) alto/2);
         
         if (boolDibujar) {
-            g2.translate(tp.getX(),tp.getY());        
+        	g2.translate(tp.getX(),tp.getY());        
+            
             /** Creacion del GeneralPath */
             GeneralPath gp = new GeneralPath();                       
             /** ligar un iterador a la lista de objetos Punto */
