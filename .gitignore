@@ -6,6 +6,8 @@ tmp/
 *.swp
 *~.nib
 *.jar
+*.classpath
+*.project
 local.properties
 .settings/
 .loadpath
