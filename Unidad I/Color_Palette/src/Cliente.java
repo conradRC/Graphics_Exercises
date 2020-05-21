@@ -19,3 +19,4 @@ public class Cliente {
 		frame.setVisible(true);
 	}
 }
+
