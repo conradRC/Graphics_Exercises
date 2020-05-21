@@ -1,5 +1,5 @@
 
-# FiGURA
+# FIGURA
 
 ## Datos
 * Version y fecha: 1.0 20/04/2020
