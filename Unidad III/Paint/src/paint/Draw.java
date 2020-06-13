@@ -35,7 +35,7 @@ public class Draw extends JComponent {
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				Shape linea = drawLine(origen.x, origen.y, e.getX(), e.getY());
+				Shape linea = Line.drawLine(origen.x, origen.y, e.getX(), e.getY());
 				System.out.println(linea.getBounds());
 				lineas.add(linea);
 			}
@@ -66,16 +66,12 @@ public class Draw extends JComponent {
 			g2.draw(linea);
 
 		if (origen != null && destino != null) {
-			Shape linea = drawLine(origen.x, origen.y, destino.x, destino.y);
+			Shape linea = Line.drawLine(origen.x, origen.y, destino.x, destino.y);
 			g2.draw(linea);
 		}
 	}
 
-	public static Line2D.Float drawLine(int x1, int y1, int x2, int y2) {
-		return new Line2D.Float(x1, y1, x2, y2);
-	}
-
-	public void remover() {
+		public void remover() {
 		if (lineas.size() - 1 >= 0) {
 			lineas.remove(lineas.size() - 1);
 			for (Shape linea : lineas) 
