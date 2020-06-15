@@ -40,7 +40,7 @@ public class Draw extends JComponent {
 
 	public void paintComponent(Graphics g) {
 		g2 = (Graphics2D) g;
-		
+		g2.setColor(Color.WHITE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		BasicStroke bs2 = new BasicStroke(10, BasicStroke.JOIN_MITER, BasicStroke.JOIN_MITER);
 		g2.setStroke(bs2);
@@ -115,12 +115,5 @@ public class Draw extends JComponent {
 		}
 	}
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("");
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setSize(800, 600);
-		frame.setLocationRelativeTo(null);
-		frame.getContentPane().add(new Draw());
-		frame.setVisible(true);
-	}
+	
 }
