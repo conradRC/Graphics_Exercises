@@ -63,6 +63,14 @@ public class Draw extends JComponent {
 		}
 	}
 
+	public IFigures check(MouseEvent e) {
+		for (IFigures iFigures : lineas1) {
+			if (iFigures.fInside(e.getX(), e.getY())) 
+				return iFigures;
+		}
+		return null;
+	}
+	
 	class Controller implements MouseMotionListener, MouseListener {
 		@Override
 		public void mouseDragged(MouseEvent e) {
