@@ -38,7 +38,6 @@ public class Draw extends JComponent {
 		Controller control = new Controller();
 		addMouseListener(control);
 		addMouseMotionListener(control);
-		test();
 	}
 	
 
@@ -75,11 +74,7 @@ public class Draw extends JComponent {
 		return new Line2D.Float(x1, y1, x2, y2);
 	}
 	
-	public void test() {
-		Shape linea = drawLine(50, 50, 100, 100, 1);
-		lineas.add(linea);
-	}
-
+	
 	public void remover() {
 		if (lineas.size() - 1 >= 0) {
 			lineas.remove(lineas.size() - 1);
@@ -117,7 +112,6 @@ public class Draw extends JComponent {
 		public void mouseDragged(MouseEvent e) {
 			destino = new Point(e.getX(), e.getY());
 			repaint();
-			
 		}
 		
 
