@@ -26,14 +26,13 @@ public class Draw extends JComponent {
 	private Color c;
 	private LinkedList<IFigures> lineas = new LinkedList<IFigures>();
 
-	private int choosed_figure;
+	private int choosed_figure=0;
 	public Draw() {
 		Controller control = new Controller();
 		addMouseListener(control);
 		addMouseMotionListener(control);
 		c= Color.BLUE;
 		setC(c);
-		choosed_figure = 0;
 	}
 
 	public void addFigures(IFigures figura) {
@@ -45,7 +44,7 @@ public class Draw extends JComponent {
 		g2 = (Graphics2D) g;
 		g2.setColor(Color.WHITE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		BasicStroke bs2 = new BasicStroke(10, BasicStroke.JOIN_MITER, BasicStroke.JOIN_MITER);
+		BasicStroke bs2 = new BasicStroke(2, BasicStroke.JOIN_MITER, BasicStroke.JOIN_MITER);
 		g2.setStroke(bs2);
 
 		g2.setColor(Color.BLUE);
@@ -80,9 +79,20 @@ public class Draw extends JComponent {
 	}
 
 	public void mouseDF(MouseEvent e) {
-		destino = new Point(e.getX(), e.getY());
-		repaint();
-		drag = null;
+		if(choosed_figure==0) {
+			destino = new Point(e.getX(), e.getY());
+			repaint();
+			drag = null;
+		}
+		else {
+			int a = origen.x;
+			int b = origen.y;
+			int x = e.getX()-a;
+			int y = e.getY()-b;
+			destino = new Point(x,y); 
+			
+			repaint();
+		}
 	}
 
 	public void mouseDT(MouseEvent e) {
@@ -135,6 +145,7 @@ public class Draw extends JComponent {
 		public void mousePressed(MouseEvent e) {
 			if (!flag) {
 				origen = new Point(e.getX(), e.getY());
+				System.out.println(origen.getX());
 			}
 		}
 
