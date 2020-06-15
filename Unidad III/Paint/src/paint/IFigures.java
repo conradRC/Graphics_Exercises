@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public interface IFigures {
-	public void dibujate(Graphics2D g);
+	
+	public void paint_figure(Graphics2D g);
 	
 	public boolean fInside(int x, int y);
 

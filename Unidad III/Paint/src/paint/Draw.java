@@ -19,14 +19,12 @@ import java.util.LinkedList;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-
 public class Draw extends JComponent {
 	private Graphics2D g2;
 	private  Point origen;
 	private Point destino;
 	private int xinit;
 	private int yinit;
-	private int rect;
 	private Shape s = null;
 	private boolean flag;
 	private ArrayList<Shape> lineas = new ArrayList<Shape>();
@@ -34,7 +32,6 @@ public class Draw extends JComponent {
 	private LinkedList<Shape> lineas1 = new LinkedList<Shape>();
 	
 	public Draw() {
-		
 		Controller control = new Controller();
 		addMouseListener(control);
 		addMouseMotionListener(control);
@@ -43,8 +40,7 @@ public class Draw extends JComponent {
 
 	public void paintComponent(Graphics g) {
 		g2 = (Graphics2D) g;
-		g2.setColor(Color.WHITE);
-
+		
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		BasicStroke bs2 = new BasicStroke(10, BasicStroke.JOIN_MITER, BasicStroke.JOIN_MITER);
 		g2.setStroke(bs2);
@@ -66,47 +62,11 @@ public class Draw extends JComponent {
 		}
 	}
 
-	public ArrayList<Shape> getLineas() {
-		return lineas;
-	}
-
 	public Line2D.Float drawLine(int x1, int y1, int x2, int y2, int a) {
 		return new Line2D.Float(x1, y1, x2, y2);
 	}
 	
 	
-	public void remover() {
-		if (lineas.size() - 1 >= 0) {
-			lineas.remove(lineas.size() - 1);
-			for (Shape linea : lineas)
-				g2.draw(linea);
-		}
-	}
-
-	public Shape insidef(int x, int y) {
-	
-		for (int i = 0; i < lineas.size(); i++) {
-			Shape shape = lineas.get(i);
-			double x1 = shape.getBounds().getX();
-			double y1 = shape.getBounds().getY();
-			double x2 = shape.getBounds().getWidth();
-			double y2 = shape.getBounds().getHeight();
-			if ((x > x1) && (x < (x1 + x2)) && (y > y1) && (y < (y1 + y2))) {
-				Rectangle2D.Double r = new Rectangle2D.Double(x1, y1, x2, y2);
-				
-				g2.draw(r);
-				
-				rect = i;
-				drag=true;
-				return shape;
-			}
-			else {
-				drag= false;
-			}
-		}
-		return null;
-	}
-
 	class Controller implements MouseMotionListener, MouseListener {
 		@Override
 		public void mouseDragged(MouseEvent e) {
@@ -114,17 +74,16 @@ public class Draw extends JComponent {
 			repaint();
 		}
 		
-
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			if (!lineas.isEmpty()) {
+			/*if (!lineas.isEmpty()) {
 				insidef(e.getX(), e.getY());
 				if (drag) {
 					setCursor(new Cursor(13));
 				} else {
 					setCursor(new Cursor(0));
 				}
-			}
+			}*/
 		}
 
 		@Override

@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.geom.Line2D;
 
-public class DrawLine {
+public class DrawLine implements IFigures{
 	private int x1;
 	private int x2;
 	private int y1;
@@ -36,7 +36,7 @@ public class DrawLine {
 		return flag;
 	}
 
-	public void dlpaint(Graphics2D g) {
+	public void paint_figure(Graphics2D g) {
 		Graphics2D g2d = (Graphics2D) g;
 		line = new Line2D.Float(x1, y1, x2, y2);
 		g2d.draw(line);
@@ -67,4 +67,5 @@ public class DrawLine {
 	public int getY() {
 		return y1;
 	}
+
 }
