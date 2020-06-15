@@ -8,7 +8,7 @@ public class Principal extends JFrame{
 		setSize(800, 600);
         setLocationRelativeTo(null);
 		setDefaultCloseOperation(3);
-		add(new SistemaControl());
+		add(new ControlWorkSpace());
 	}
 	
 	public static void main(String[] args) {	

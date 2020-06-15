@@ -14,7 +14,6 @@ import java.awt.geom.Line2D;
 import java.util.LinkedList;
 
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 
 public class Draw extends JComponent {
 	private Graphics2D g2;
@@ -22,10 +21,9 @@ public class Draw extends JComponent {
 	private Point destino;
 	private int xinit;
 	private int yinit;
-	private Shape s = null;
-	private boolean flag;
+	private IFigures drag = null;
+	private boolean flag= false;
 	
-	private boolean drag = false;
 	private LinkedList<IFigures> lineas1 = new LinkedList<IFigures>();
 	
 	public Draw() {
@@ -57,9 +55,12 @@ public class Draw extends JComponent {
 		
 		g2.setStroke(bs2);
 		g2.setColor(Color.BLUE);
-		if (origen != null && destino != null) {
-			Shape linea = new Line2D.Float(origen.x, origen.y, destino.x, destino.y);
-			g2.draw(linea);
+		
+		if(!flag) {
+			if (origen != null && destino != null) {
+				Shape linea = new Line2D.Float(origen.x, origen.y, destino.x, destino.y);
+				g2.draw(linea);
+			}
 		}
 	}
 
@@ -73,13 +74,32 @@ public class Draw extends JComponent {
 	
 	class Controller implements MouseMotionListener, MouseListener {
 		@Override
+		
 		public void mouseDragged(MouseEvent e) {
-			destino = new Point(e.getX(), e.getY());
-			repaint();
+			if(!flag) {
+				System.out.println("dragged :"+flag);
+				destino = new Point(e.getX(), e.getY());
+				repaint();
+			}
+			
+			if(flag) {
+				if (drag == null) {
+					xinit = e.getX();
+					yinit = e.getY();
+					drag = check(e);
+				}
+				else {
+					drag.setPosicion(drag.getX() + (e.getX() - xinit),drag.getY() + (e.getY() - yinit));
+					xinit = e.getX();
+					yinit = e.getY();
+					repaint();
+				}
+			}
 		}
 		
 		@Override
 		public void mouseMoved(MouseEvent e) {
+			drag=null;
 			/*if (!lineas.isEmpty()) {
 				insidef(e.getX(), e.getY());
 				if (drag) {
@@ -92,14 +112,19 @@ public class Draw extends JComponent {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			origen = new Point(e.getX(), e.getY());
+			if(!flag) {
+				System.out.println("pressed :"+flag);
+				origen = new Point(e.getX(), e.getY());
+			}
 		}
 		
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			IFigures linea = new DrawLine(origen.x, origen.y, e.getX(), e.getY());
-			addFigures(linea);
-			
+			if(!flag) {
+				System.out.println("released :"+flag);
+				IFigures linea = new DrawLine(origen.x, origen.y, e.getX(), e.getY());
+				addFigures(linea);
+			}	
 		}
 		
 		@Override
@@ -115,5 +140,19 @@ public class Draw extends JComponent {
 		}
 	}
 
+	public void test() {
+		
+	}
+	
+	public boolean isFlag() {		
+		return flag;
+	}
+
+	public void setFlag(boolean flag) {
+		System.out.println(flag);
+		this.flag = flag;
+	}
+
+	
 	
 }
