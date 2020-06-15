@@ -21,6 +21,14 @@ public class DrawLine implements IFigures{
 		this.color = Color.blue;
 	}
 
+	public DrawLine(int x1, int y1, int x2, int y2,Color c) {
+		this.x1 = x1;
+		this.x2 = x2;
+		this.y1 = y1;
+		this.y2 = y2;
+		this.color =c;
+	}
+	
 	public boolean fInside(int x, int y) {
 		boolean flag = false;
 		double lx1 = line.getBounds().getX();

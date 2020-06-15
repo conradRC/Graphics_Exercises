@@ -17,23 +17,27 @@ import javax.swing.JComponent;
 
 public class Draw extends JComponent {
 	private Graphics2D g2;
-	private Point origen;
+	private Point origen ;
 	private Point destino;
 	private int xinit;
 	private int yinit;
 	private static IFigures drag = null;
-	private boolean flag = true;
-	private LinkedList<IFigures> lineas1 = new LinkedList<IFigures>();
+	private boolean flag = false;
+	private Color c;
+	private LinkedList<IFigures> lineas = new LinkedList<IFigures>();
 
+	private int choosed_figure;
 	public Draw() {
 		Controller control = new Controller();
 		addMouseListener(control);
 		addMouseMotionListener(control);
-		//test();
+		c= Color.BLUE;
+		setC(c);
+		choosed_figure = 0;
 	}
 
 	public void addFigures(IFigures figura) {
-		lineas1.add(figura);
+		lineas.add(figura);
 		repaint();
 	}
 
@@ -46,37 +50,39 @@ public class Draw extends JComponent {
 
 		g2.setColor(Color.BLUE);
 
-		if (!lineas1.isEmpty()) {
-			for (IFigures figure : lineas1)
+		if (!lineas.isEmpty()) {
+			for (IFigures figure : lineas)
 				figure.paint_figure(g2);
 		}
 
 		if (origen != null && destino != null && !flag) {
-			Shape s =  new Line2D.Float(origen.x, origen.y, destino.x, destino.y);
-			g2.draw(s);
+			if(choosed_figure==0) {
+				Shape s = new Line2D.Float(origen.x, origen.y, destino.x, destino.y);
+				g2.draw(s);
+			}
+			else {
+				if (origen != null && destino != null && !flag) {
+					g2.drawRect(origen.x, origen.y, destino.x, destino.y);
+				}
+			}
+			
 		}
-		
 	}
 
 	public IFigures checkFigure(MouseEvent e) {
-		System.out.println(lineas1.size());
-		for (IFigures iFigures : lineas1) {
+		for (IFigures iFigures : lineas) {
 			if (iFigures.fInside(e.getX(), e.getY())) {
+				flag = true;
 				return iFigures;
 			}
 		}
 		return null;
 	}
-	
-	public void test() {
-		IFigures d = new DrawLine(50, 50, 400, 300);
-		addFigures(d);
-	}
 
 	public void mouseDF(MouseEvent e) {
 		destino = new Point(e.getX(), e.getY());
 		repaint();
-		drag=null;
+		drag = null;
 	}
 
 	public void mouseDT(MouseEvent e) {
@@ -85,6 +91,7 @@ public class Draw extends JComponent {
 				xinit = e.getX();
 				yinit = e.getY();
 				drag = checkFigure(e);
+				
 			} else {
 				drag.setPosicion(drag.getX() + (e.getX() - xinit), drag.getY() + (e.getY() - yinit));
 				xinit = e.getX();
@@ -94,15 +101,27 @@ public class Draw extends JComponent {
 		} catch (Exception ex) {
 		}
 	}
+	
+	
 
 	class Controller implements MouseMotionListener, MouseListener {
 		@Override
 		public void mouseDragged(MouseEvent e) {
-
-			if (flag) {
-				mouseDT(e);
-			} else {
-				mouseDF(e);
+			if(choosed_figure==1) {
+				if (flag) {
+					mouseDT(e);
+				}
+				else {
+					mouseDF(e);
+				}
+			}
+			if(choosed_figure==0) {
+				if (flag) {
+					mouseDT(e);
+				}
+				else {
+					mouseDF(e);
+				}
 			}
 		}
 
@@ -114,12 +133,26 @@ public class Draw extends JComponent {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			if (!flag) origen = new Point(e.getX(), e.getY());
+			if (!flag) {
+				origen = new Point(e.getX(), e.getY());
+			}
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			if (!flag) addFigures(new DrawLine(origen.x, origen.y, destino.x, destino.y));
+			if (!flag) {
+				switch (choosed_figure) {
+				case 0:
+					addFigures(new DrawLine(origen.x, origen.y, destino.x, destino.y, c));
+					break;
+				case 1:
+					addFigures(new DrawRectangle(origen.x, origen.y, destino.x, destino.y, c));
+					break;
+				default:
+					
+					break;
+				}
+			}
 		}
 
 		@Override
@@ -136,8 +169,9 @@ public class Draw extends JComponent {
 	}
 
 	public void reset() {
-		lineas1.clear();
+		lineas.clear();
 		repaint();
+		updateUI();
 	}
 
 	public boolean isFlag() {
@@ -153,8 +187,26 @@ public class Draw extends JComponent {
 	}
 
 	public void setFlag(boolean flag) {
-		System.out.println(flag);
+
 		this.flag = flag;
 	}
 
+	public Color getC() {
+		return c;
+	}
+
+	public void setC(Color c) {
+		this.c = c;
+	}
+
+	public int getChoosed_figure() {
+		return choosed_figure;
+	}
+
+	public void setChoosed_figure(int choosed_figure) {
+		this.choosed_figure = choosed_figure;
+	}
+	
+	
+	
 }

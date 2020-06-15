@@ -24,6 +24,12 @@ public class ControlLateral implements ActionListener {
 		case "DELETE":
 			paint.reset();
 			break;
+		case "LINEA":
+			paint.setChoosed_figure(0);
+			break;
+		case "RECTANGULO":
+			paint.setChoosed_figure(1);
+			break;
 		default:
 			break;
 		}
