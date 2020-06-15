@@ -2,7 +2,6 @@ package paint;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -12,8 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.JComponent;
@@ -27,9 +24,9 @@ public class Draw extends JComponent {
 	private int yinit;
 	private Shape s = null;
 	private boolean flag;
-	private ArrayList<Shape> lineas = new ArrayList<Shape>();
+	
 	private boolean drag = false;
-	private LinkedList<Shape> lineas1 = new LinkedList<Shape>();
+	private LinkedList<IFigures> lineas1 = new LinkedList<IFigures>();
 	
 	public Draw() {
 		Controller control = new Controller();
@@ -37,6 +34,9 @@ public class Draw extends JComponent {
 		addMouseMotionListener(control);
 	}
 	
+	public void addFigures(IFigures figura) {
+		lineas1.add(figura);
+	}
 
 	public void paintComponent(Graphics g) {
 		g2 = (Graphics2D) g;
@@ -46,9 +46,10 @@ public class Draw extends JComponent {
 		g2.setStroke(bs2);
 
 		g2.setColor(Color.BLUE);
-		for (Shape linea : lineas)
-			g2.draw(linea);
-
+		
+		for (IFigures figure : lineas1) {
+			figure.paint_figure(g2);
+		}
 		g2.setColor(new Color(50, 50, 50));
 		BasicStroke bs4 = new BasicStroke(0.5f, BasicStroke.JOIN_MITER, BasicStroke.JOIN_MITER);
 		g2.setStroke(bs4);
@@ -57,16 +58,11 @@ public class Draw extends JComponent {
 		g2.setStroke(bs2);
 		g2.setColor(Color.BLUE);
 		if (origen != null && destino != null) {
-			Shape linea = drawLine(origen.x, origen.y, destino.x, destino.y, 1);
+			Shape linea = new Line2D.Float(origen.x, origen.y, destino.x, destino.y);
 			g2.draw(linea);
 		}
 	}
 
-	public Line2D.Float drawLine(int x1, int y1, int x2, int y2, int a) {
-		return new Line2D.Float(x1, y1, x2, y2);
-	}
-	
-	
 	class Controller implements MouseMotionListener, MouseListener {
 		@Override
 		public void mouseDragged(MouseEvent e) {
@@ -93,11 +89,11 @@ public class Draw extends JComponent {
 		
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			Shape linea = drawLine(origen.x, origen.y, e.getX(), e.getY(), 1);
-			lineas.add(linea);
-			flag=false;
+			IFigures linea = new DrawLine(origen.x, origen.y, e.getX(), e.getY());
+			addFigures(linea);
+			
 		}
-
+		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 		}
