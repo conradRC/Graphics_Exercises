@@ -15,11 +15,14 @@ public class ControlLateral implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String choose = e.getActionCommand();
 		switch (choose) {
-		case "DELETE":
+		case "ADD":
 			paint.setFlag(false);
 			break;
 		case "MOVE":
 			paint.setFlag(true);
+			break;
+		case "DELETE":
+			paint.reset();
 			break;
 		default:
 			break;

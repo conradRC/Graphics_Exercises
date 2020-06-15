@@ -119,6 +119,8 @@ public class ControlWorkSpace extends JPanel {
 		btRemover.setActionCommand("DELETE");
 		btnMove.addActionListener(control);
 		btnMove.setActionCommand("MOVE");
+		btAgregar.addActionListener(control);
+		btAgregar.setActionCommand("ADD");
 	}
 
 }

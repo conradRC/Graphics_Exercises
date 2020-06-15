@@ -10,12 +10,8 @@ public class DrawLine implements IFigures{
 	private int x2;
 	private int y1;
 	private int y2;
-	private int width;
-	private int heigth;
 	private Color color;
 	private Line2D.Float line;
-	private Point origen;
-	private Point destino;
 
 	public DrawLine(int x1, int y1, int x2, int y2) {
 		this.x1 = x1;
@@ -31,8 +27,9 @@ public class DrawLine implements IFigures{
 		double ly1 = line.getBounds().getY();
 		double width = line.getBounds().getWidth();
 		double heigth = line.getBounds().getHeight();
-		if ((x > lx1) && (x < (lx1 + width)) && (y > ly1) && (y < (ly1 + heigth)))
+		if ((x > lx1) && (x < (lx1 + width)) && (y > ly1) && (y < (ly1 + heigth))) {
 			flag = true;
+		}
 		return flag;
 	}
 
